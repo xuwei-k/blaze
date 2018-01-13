@@ -133,7 +133,7 @@ private[nio2] final class ByteBufferHead(channel: AsynchronousSocketChannel, buf
     }
 
     try channel.close()
-    catch { case e: IOException => /* Don't care */ }
+    catch { case _: IOException => /* Don't care */ }
   }
 
   override protected def finalize(): Unit = {
@@ -141,7 +141,7 @@ private[nio2] final class ByteBufferHead(channel: AsynchronousSocketChannel, buf
       logger.warn("ByteBufferHead hasn't been shutdown before going " +
                   "out of scope, potentially leaking a file descriptor.")
       try channel.close()
-      catch { case e: IOException => /* Don't care */ }
+      catch { case _: IOException => /* Don't care */ }
     }
     super.finalize()
   }

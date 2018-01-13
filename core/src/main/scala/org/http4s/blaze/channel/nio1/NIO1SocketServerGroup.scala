@@ -230,7 +230,7 @@ final class NIO1SocketServerGroup private(
         else Failure(EOF)
 
       } catch {
-        case e: ClosedChannelException => Failure(EOF)
+        case _: ClosedChannelException => Failure(EOF)
         case e: IOException if brokePipeMessages.contains(e.getMessage) => Failure(EOF)
         case e: IOException => Failure(e)
       }
@@ -277,7 +277,7 @@ final class NIO1SocketServerGroup private(
         }
       }
       catch {
-        case e: ClosedChannelException => WriteError(EOF)
+        case _: ClosedChannelException => WriteError(EOF)
         case e: IOException if brokePipeMessages.contains(e.getMessage) => WriteError(EOF)
         case e: IOException =>
           logger.warn(e)("Error writing to channel")

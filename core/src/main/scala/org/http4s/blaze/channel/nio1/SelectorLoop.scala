@@ -142,7 +142,7 @@ final class SelectorLoop(id: String, selector: Selector, bufferSize: Int) extend
 
             }
           } catch {
-            case e: CancelledKeyException => /* NOOP */
+            case _: CancelledKeyException => /* NOOP */
             case t: Throwable =>
               logger.error(t) {
                 if (t.isInstanceOf[IOException]) "IOException while performing channel operations. Closing channel."
